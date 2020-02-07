@@ -6,7 +6,7 @@ namespace Home_Sweet_Home
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            SQLClass s = new SQLClass();
         }
     }
 }

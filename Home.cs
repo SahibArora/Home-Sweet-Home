@@ -21,7 +21,7 @@ namespace Home_Sweet_Home
         double width_of_home;
 
         // initializing
-        Home() {
+        public Home() {
             area_of_home = new List<Area_In_Home>();
             users = new List<User>();
 
@@ -48,7 +48,7 @@ namespace Home_Sweet_Home
         double width_of_area;
 
         // initializing
-        Area_In_Home() {
+        public Area_In_Home() {
             name_area = null;
             description_area = null;
             length_of_area = 0.0;
@@ -67,7 +67,7 @@ namespace Home_Sweet_Home
         string name_activity;
 
         // initializing
-        Activity_Area_In_Home() {
+        public Activity_Area_In_Home() {
             users_assigned = new List<User>();
 
             name_activity = null;

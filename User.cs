@@ -14,11 +14,21 @@ namespace Home_Sweet_Home
         char gender;
 
         // initializing 
-        User() {
+        public User() {
             name = null;
             email = null;
             password = null;
             gender = '\0';
+        }
+
+        public void register() {
+            try {
+                Console.WriteLine("Please enter your name: ");
+
+            }
+            catch (Exception e) {
+                Console.WriteLine("Encountered an Error!", e);
+            }
         }
     }
 }
