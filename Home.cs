@@ -65,12 +65,18 @@ namespace Home_Sweet_Home
         List<User> users_assigned;
 
         string name_activity;
+        string description;
+        int no_of_members;
+        bool completed;
 
         // initializing
         public Activity_Area_In_Home() {
             users_assigned = new List<User>();
 
             name_activity = null;
+            description = null;
+            no_of_members = 0;
+            completed = false;
         }
     }
 }
