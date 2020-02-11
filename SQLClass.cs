@@ -49,9 +49,121 @@ namespace Home_Sweet_Home
         }
 
         // Code the insert function for the table, get the table name as parameter.
+        public bool insertHome(string announcement,
+        string name_home,
+        string address_home,
+        string description_home,
+        int no_of_member_home,
+        double length_of_home,
+        double width_of_home) {
+
+            return false;
+        }
+
+        public bool insertArea(string name_area,
+        string description_area,
+        double length_of_area,
+        double width_of_area) {
+
+            return false;
+        }
+        
+        public bool insertActivity(string name_activity,
+        string description,
+        int no_of_members,
+        bool completed) {
+
+            return false;
+        }
+
+        public bool insertUser(string name,
+        string email,
+        string password,
+        char gender) {
+
+            return false;
+        }
 
         // code the delet function
 
+        public bool deleteHome(string announcement,
+        string name_home,
+        string address_home,
+        string description_home,
+        int no_of_member_home,
+        double length_of_home,
+        double width_of_home)
+        {
+
+            return false;
+        }
+
+        public bool deleteArea(string name_area,
+        string description_area,
+        double length_of_area,
+        double width_of_area)
+        {
+
+            return false;
+        }
+
+        public bool deleteActivity(string name_activity,
+        string description,
+        int no_of_members,
+        bool completed)
+        {
+
+            return false;
+        }
+
+        public bool deleteUser(string name,
+        string email,
+        string password,
+        char gender)
+        {
+
+            return false;
+        }
+
         // code the update function
+        public bool updateHome(string announcement,
+        string name_home,
+        string address_home,
+        string description_home,
+        int no_of_member_home,
+        double length_of_home,
+        double width_of_home)
+        {
+
+            return false;
+        }
+
+        public bool updateArea(string name_area,
+        string description_area,
+        double length_of_area,
+        double width_of_area)
+        {
+
+            return false;
+        }
+
+        public bool updateActivity(string name_activity,
+        string description,
+        int no_of_members,
+        bool completed)
+        {
+
+            return false;
+        }
+
+        public bool updateUser(string name,
+        string email,
+        string password,
+        char gender)
+        {
+
+            return false;
+        }
+
     }
 }
