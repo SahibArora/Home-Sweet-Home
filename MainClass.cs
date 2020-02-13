@@ -20,6 +20,12 @@ namespace Home_Sweet_Home
             if (s.insertActivity("Cleaning", "Clean whole room", 3, false)) {
                 Console.WriteLine("Aactivity Added");
             }
+
+            // REGISTER or LOG-IN
+
+            // ADD TO HOME or ADD A NEW HOME (ONE HOME SHOWN AT ONE TIME, IF MORE THAN TWO ASK USER WHICH ONE THEY WANT TO SEE!) 
+
+            // IN THE HOME THEY CAN SEE MEMBERS, CREATE ANNOUNCEMENTS, ADD AREAS and ADD ACTIVITIES (according to permissions)
         }
     }
 }

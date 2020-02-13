@@ -52,7 +52,7 @@ namespace Home_Sweet_Home
 
                 // Creating the bridge tables..
 
-                UserHome = new SqlCommand("CREATE TABLE UserHome (UserPk INT, HomePk INT, FOREIGN KEY(UserPk) REFERENCES Users(UserPk), FOREIGN KEY(HomePk) REFERENCES Home(HomePk), PRIMARY KEY(UserPk,HomePk) )", cnn);
+                UserHome = new SqlCommand("CREATE TABLE UserHome (UserPk INT, HomePk INT, Permission char(1), FOREIGN KEY(UserPk) REFERENCES Users(UserPk), FOREIGN KEY(HomePk) REFERENCES Home(HomePk), PRIMARY KEY(UserPk,HomePk) )", cnn);
                 UserHome.ExecuteNonQuery();
                 UserHome.Dispose();
 
