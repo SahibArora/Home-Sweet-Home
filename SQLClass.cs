@@ -49,6 +49,16 @@ namespace Home_Sweet_Home
                 AreaActivityFK = new SqlCommand("ALTER TABLE Area ADD CONSTRAINT AreaActivityFK FOREIGN KEY(ActivityFk) REFERENCES Activity(ActivityPk)", cnn);
                 AreaActivityFK.ExecuteNonQuery();
                 AreaActivityFK.Dispose();
+
+                // Creating the bridge tables..
+
+                UserHome = new SqlCommand("CREATE TABLE UserHome (UserPk INT, HomePk INT, FOREIGN KEY(UserPk) REFERENCES Users(UserPk), FOREIGN KEY(HomePk) REFERENCES Home(HomePk), PRIMARY KEY(UserPk,HomePk) )", cnn);
+                UserHome.ExecuteNonQuery();
+                UserHome.Dispose();
+
+                UserActivity = new SqlCommand("CREATE TABLE UserActivity (UserPk INT, ActivityPk INT, FOREIGN KEY(UserPk) REFERENCES Users(UserPk), FOREIGN KEY(ActivityPk) REFERENCES Activity(ActivityPk), PRIMARY KEY(UserPk,ActivityPk) )", cnn);
+                UserActivity.ExecuteNonQuery();
+                UserActivity.Dispose();
             }
             catch (Exception e)
             {
