@@ -8,7 +8,7 @@ namespace Home_Sweet_Home
     class SQLClass
     {
         // Connection String kept private, due to securtiy issues.
-        String connectionString;
+        String connectionString = "Server=tcp:home-sweet-home.database.windows.net,1433;Initial Catalog=home_sweet_home_db;Persist Security Info=False;User ID=Home_Sweet_Home;Password=Sahib@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public SQLClass()
         {
             SqlConnection cnn = new SqlConnection(connectionString);
@@ -21,7 +21,7 @@ namespace Home_Sweet_Home
                 // Functions regarding various functionalities will go in the this class!!
 
                 cnn.Open();
-                
+                /*
                 SqlCommand User, Home, Area, Activity, HomeAreaFK, AreaActivityFK, UserHome, UserActivity;
 
                 User = new SqlCommand("CREATE TABLE Users (UserPK INT NOT NULL IDENTITY(1,1), Name varchar(20),email varchar(40),password varchar(20), gender char(1), PRIMARY KEY(UserPk))", cnn);
@@ -59,6 +59,7 @@ namespace Home_Sweet_Home
                 UserActivity = new SqlCommand("CREATE TABLE UserActivity (UserPk INT, ActivityPk INT, FOREIGN KEY(UserPk) REFERENCES Users(UserPk), FOREIGN KEY(ActivityPk) REFERENCES Activity(ActivityPk), PRIMARY KEY(UserPk,ActivityPk) )", cnn);
                 UserActivity.ExecuteNonQuery();
                 UserActivity.Dispose();
+                */
             }
             catch (Exception e)
             {
@@ -74,7 +75,6 @@ namespace Home_Sweet_Home
         string name_home,
         string address_home,
         string description_home,
-        int no_of_member_home,
         double length_of_home,
         double width_of_home) {
             SqlConnection cnn = new SqlConnection(connectionString);
@@ -82,7 +82,9 @@ namespace Home_Sweet_Home
             {
                 cnn.Open();
                 
-                string query = "INSERT INTO HOME (Announcement , Home_Name , Address , Description , no_of_member , length , width ) VALUES (" + "'" + announcement + "'" + "," + "'" + name_home + "'" + "," + "'" + address_home + "'" + "," + "'" + description_home + "'" + "," + no_of_member_home + "," + length_of_home + "," + width_of_home + ")";
+                // NUMBER OF MEMBERS WILL BE ADDED DYNAMICALLY!
+
+                string query = "INSERT INTO HOME (Announcement , Home_Name , Address , Description , length , width ) VALUES (" + "'" + announcement + "'" + "," + "'" + name_home + "'" + "," + "'" + address_home + "'" + "," + "'" + description_home + "'" + "," + length_of_home + "," + width_of_home + ")";
                 SqlCommand Insert;
                 Insert = new SqlCommand(query, cnn);
                 Insert.ExecuteNonQuery();
@@ -126,7 +128,6 @@ namespace Home_Sweet_Home
         
         public bool insertActivity(string name_activity,
         string description,
-        int no_of_members,
         bool completed) {
 
             SqlConnection cnn = new SqlConnection(connectionString);
@@ -137,7 +138,10 @@ namespace Home_Sweet_Home
                     comp = 1;
                 }
                 cnn.Open();
-                string query = "INSERT INTO ACTIVITY (Name, Description, no_of_member, completed) VALUES (" + "'" + name_activity + "'" + "," + "'" + description + "'" + "," + no_of_members + "," + comp + ")";
+
+                // NUMBER OF MEMBERS WILL BE DONE DYNAMICALLY!
+
+                string query = "INSERT INTO ACTIVITY (Name, Description, completed) VALUES (" + "'" + name_activity + "'" + "," + "'" + description + "'" + "," + comp + ")";
                 SqlCommand Insert;
                 Insert = new SqlCommand(query, cnn);
                 Insert.ExecuteNonQuery();
