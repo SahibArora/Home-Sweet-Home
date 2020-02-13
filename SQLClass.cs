@@ -8,7 +8,7 @@ namespace Home_Sweet_Home
     class SQLClass
     {
         // Connection String kept private, due to securtiy issues.
-        String connectionString;
+        String connectionString = "Server=tcp:home-sweet-home.database.windows.net,1433;Initial Catalog=home_sweet_home_db;Persist Security Info=False;User ID=Home_Sweet_Home;Password=Sahib@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public SQLClass()
         {
             SqlConnection cnn = new SqlConnection(connectionString);
@@ -22,23 +22,33 @@ namespace Home_Sweet_Home
 
                 cnn.Open();
                 
-                SqlCommand User, Home, Area, Activity;
+                SqlCommand User, Home, Area, Activity, HomeAreaFK, AreaActivityFK, UserHome, UserActivity;
 
-                /*User = new SqlCommand("CREATE TABLE Users (Name varchar(20),email varchar(40),password varchar(20), gender char(1))", cnn);
+                User = new SqlCommand("CREATE TABLE Users (UserPK INT NOT NULL IDENTITY(1,1), Name varchar(20),email varchar(40),password varchar(20), gender char(1), PRIMARY KEY(UserPk))", cnn);
                 User.ExecuteNonQuery();
                 User.Dispose();
 
-                Home = new SqlCommand("CREATE TABLE Home (Announcement varchar(100), Home_Name varchar(20), Address varchar(40), Description varchar(100), no_of_member decimal(5,0), length decimal(10,2), width decimal(10,2))", cnn);
+                Home = new SqlCommand("CREATE TABLE Home (HomePk INT NOT NULL IDENTITY(1,1), Announcement varchar(100), Home_Name varchar(20), Address varchar(40), Description varchar(100), no_of_member INT, length decimal(10,2), width decimal(10,2), AreaFK INT, PRIMARY KEY(HomePk))", cnn);
                 Home.ExecuteNonQuery();
                 Home.Dispose();
 
-                Area = new SqlCommand("CREATE TABLE Area (Name varchar(20), Description varchar(100), length decimal(10,2), width decimal(10,2))", cnn);
+                Area = new SqlCommand("CREATE TABLE Area (AreaPk INT NOT NULL IDENTITY(1,1), Name varchar(20), Description varchar(100), length decimal(10,2), width decimal(10,2), ActivityFk INT, PRIMARY KEY(AreaPk))", cnn);
                 Area.ExecuteNonQuery();
                 Area.Dispose();
 
-                Activity = new SqlCommand("CREATE TABLE Activity (Name varchar(20), Description varchar(100), no_of_member decimal(10,2), completed decimal(1,0))", cnn);
+                Activity = new SqlCommand("CREATE TABLE Activity (ActivityPk INT NOT NULL IDENTITY(1,1), Name varchar(20), Description varchar(100), no_of_member INT, completed INT, PRIMARY KEY(ActivityPk))", cnn);
                 Activity.ExecuteNonQuery();
-                Activity.Dispose();*/
+                Activity.Dispose();
+
+                // Adding constraints..
+
+                HomeAreaFK = new SqlCommand("ALTER TABLE Home ADD CONSTRAINT HomeAreaFK FOREIGN KEY(AreaFk) REFERENCES Area(AreaPk)", cnn);
+                HomeAreaFK.ExecuteNonQuery();
+                HomeAreaFK.Dispose();
+
+                AreaActivityFK = new SqlCommand("ALTER TABLE Area ADD CONSTRAINT AreaActivityFK FOREIGN KEY(ActivityFk) REFERENCES Activity(ActivityPk)", cnn);
+                AreaActivityFK.ExecuteNonQuery();
+                AreaActivityFK.Dispose();
             }
             catch (Exception e)
             {

@@ -6,6 +6,8 @@ namespace Home_Sweet_Home
 {
     class User
     {
+        // Special features
+        List<Home> homes;
 
         // normal data members
         string name;
@@ -15,6 +17,8 @@ namespace Home_Sweet_Home
 
         // initializing 
         public User() {
+            homes = new List<Home>();
+
             name = null;
             email = null;
             password = null;
