@@ -6,20 +6,22 @@ namespace Home_Sweet_Home
     {
         static void Main(string[] args)
         {
-            SQLClass s = new SQLClass();
+            int option;
+            do
+            {
+                Console.WriteLine("1 - Register");
+                Console.WriteLine("2 - Login");
+                Console.WriteLine("\n0 - Exit");
 
-            if (s.insertUser("XXX", "XXX", "XXXX", 'M')) {
-                Console.WriteLine("User Added");
-            }
-            if (s.insertHome("I am creating Home XXX", "XXX", "470 xxx xxx", "My Home", 561.0, 700.98)) {
-                Console.WriteLine("Home Added");
-            }
-            if (s.insertArea("Room-1", "Main Bedroom", 200.0, 300.0)) {
-                Console.WriteLine("Area Added");
-            }
-            if (s.insertActivity("Cleaning", "Clean whole room", false)) {
-                Console.WriteLine("Aactivity Added");
-            }
+                Console.WriteLine("\nPlease enter your option: ");
+                
+                option = Int32.Parse(Console.ReadLine());
+
+                if (option == 1) {
+                    User u = new User();
+                    u.register();
+                }
+            } while (option != 0);
 
             // REGISTER or LOG-IN
 
