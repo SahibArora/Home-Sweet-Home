@@ -86,6 +86,8 @@ namespace Home_Sweet_Home
                 } while (flagPassword != 1);
                 salt = createSalt(10);
                 hash = generateSHA256Hash(userPassword, salt);
+
+                sql.insertUser(name,"xxxx",salt,gender,hash);
             }
             catch (Exception e) {
                 Console.WriteLine("Encountered an Error!", e);

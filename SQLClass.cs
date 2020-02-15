@@ -8,7 +8,7 @@ namespace Home_Sweet_Home
     class SQLClass
     {
         // Connection String kept private, due to securtiy issues.
-        String connectionString ;
+        String connectionString = "Server=tcp:home-sweet-home.database.windows.net,1433;Initial Catalog=home_sweet_home_db;Persist Security Info=False;User ID=Home_Sweet_Home;Password=Sahib@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         public SQLClass()
         {
             SqlConnection cnn = new SqlConnection(connectionString);
@@ -90,20 +90,20 @@ namespace Home_Sweet_Home
         
         public bool insertActivity(string name_activity,
         string description,
-        bool completed) {
+        bool outcome) {
 
             SqlConnection cnn = new SqlConnection(connectionString);
             try
             {
-                double comp = 0;
-                if (completed) {
-                    comp = 1;
+                int done = 0;
+                if (outcome) {
+                    done = 1;
                 }
                 cnn.Open();
 
                 // NUMBER OF MEMBERS WILL BE DONE DYNAMICALLY!
 
-                string query = "INSERT INTO ACTIVITY (Name, Description, completed) VALUES (" + "'" + name_activity + "'" + "," + "'" + description + "'" + "," + comp + ")";
+                string query = "INSERT INTO ACTIVITY (Name, Description, completed) VALUES (" + "'" + name_activity + "'" + "," + "'" + description + "'" + "," + done + ")";
                 SqlCommand Insert;
                 Insert = new SqlCommand(query, cnn);
                 Insert.ExecuteNonQuery();

@@ -67,7 +67,7 @@ namespace Home_Sweet_Home
         string name_activity;
         string description;
         int no_of_members;
-        bool completed;
+        bool outcome;
 
         // initializing
         public Activity_Area_In_Home() {
@@ -76,7 +76,7 @@ namespace Home_Sweet_Home
             name_activity = null;
             description = null;
             no_of_members = 0;
-            completed = false;
+            outcome = false;
         }
     }
 }
