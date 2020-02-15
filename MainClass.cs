@@ -7,6 +7,7 @@ namespace Home_Sweet_Home
         static void Main(string[] args)
         {
             int option;
+            
             do
             {
                 Console.WriteLine("1 - Register");
