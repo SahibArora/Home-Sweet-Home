@@ -29,6 +29,7 @@ namespace Home_Sweet_Home
 
         public void register() {
             try {
+                SQLClass sql = new SQLClass();
 
                 Console.WriteLine("\nRegister\n");
 

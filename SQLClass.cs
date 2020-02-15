@@ -8,58 +8,20 @@ namespace Home_Sweet_Home
     class SQLClass
     {
         // Connection String kept private, due to securtiy issues.
-        String connectionString = "Server=tcp:home-sweet-home.database.windows.net,1433;Initial Catalog=home_sweet_home_db;Persist Security Info=False;User ID=Home_Sweet_Home;Password=Sahib@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        String connectionString ;
         public SQLClass()
         {
             SqlConnection cnn = new SqlConnection(connectionString);
             try
             {
 
-                // Layout Design for the tables in the constructor, below commands are working!!
                 // All data is being saved to Azure..
                 // SQL Server management is being used to query data and manage tables..
                 // Functions regarding various functionalities will go in the this class!!
 
+                // Checking if connection set-up
                 cnn.Open();
-                /*
-                SqlCommand User, Home, Area, Activity, HomeAreaFK, AreaActivityFK, UserHome, UserActivity;
-
-                User = new SqlCommand("CREATE TABLE Users (UserPK INT NOT NULL IDENTITY(1,1), Name varchar(20),email varchar(40),password varchar(20), gender char(1), PRIMARY KEY(UserPk))", cnn);
-                User.ExecuteNonQuery();
-                User.Dispose();
-
-                Home = new SqlCommand("CREATE TABLE Home (HomePk INT NOT NULL IDENTITY(1,1), Announcement varchar(100), Home_Name varchar(20), Address varchar(40), Description varchar(100), no_of_member INT, length decimal(10,2), width decimal(10,2), AreaFK INT, PRIMARY KEY(HomePk))", cnn);
-                Home.ExecuteNonQuery();
-                Home.Dispose();
-
-                Area = new SqlCommand("CREATE TABLE Area (AreaPk INT NOT NULL IDENTITY(1,1), Name varchar(20), Description varchar(100), length decimal(10,2), width decimal(10,2), ActivityFk INT, PRIMARY KEY(AreaPk))", cnn);
-                Area.ExecuteNonQuery();
-                Area.Dispose();
-
-                Activity = new SqlCommand("CREATE TABLE Activity (ActivityPk INT NOT NULL IDENTITY(1,1), Name varchar(20), Description varchar(100), no_of_member INT, completed INT, PRIMARY KEY(ActivityPk))", cnn);
-                Activity.ExecuteNonQuery();
-                Activity.Dispose();
-
-                // Adding constraints..
-
-                HomeAreaFK = new SqlCommand("ALTER TABLE Home ADD CONSTRAINT HomeAreaFK FOREIGN KEY(AreaFk) REFERENCES Area(AreaPk)", cnn);
-                HomeAreaFK.ExecuteNonQuery();
-                HomeAreaFK.Dispose();
-
-                AreaActivityFK = new SqlCommand("ALTER TABLE Area ADD CONSTRAINT AreaActivityFK FOREIGN KEY(ActivityFk) REFERENCES Activity(ActivityPk)", cnn);
-                AreaActivityFK.ExecuteNonQuery();
-                AreaActivityFK.Dispose();
-
-                // Creating the bridge tables..
-
-                UserHome = new SqlCommand("CREATE TABLE UserHome (UserPk INT, HomePk INT, Permission char(1), FOREIGN KEY(UserPk) REFERENCES Users(UserPk), FOREIGN KEY(HomePk) REFERENCES Home(HomePk), PRIMARY KEY(UserPk,HomePk) )", cnn);
-                UserHome.ExecuteNonQuery();
-                UserHome.Dispose();
-
-                UserActivity = new SqlCommand("CREATE TABLE UserActivity (UserPk INT, ActivityPk INT, FOREIGN KEY(UserPk) REFERENCES Users(UserPk), FOREIGN KEY(ActivityPk) REFERENCES Activity(ActivityPk), PRIMARY KEY(UserPk,ActivityPk) )", cnn);
-                UserActivity.ExecuteNonQuery();
-                UserActivity.Dispose();
-                */
+                
             }
             catch (Exception e)
             {
@@ -161,14 +123,15 @@ namespace Home_Sweet_Home
         // Passwords yet to be hashed!!
         public bool insertUser(string name,
         string email,
-        string password,
-        char gender) {
+        string salt,
+        char gender,
+        string hash) {
 
             SqlConnection cnn = new SqlConnection(connectionString);
             try
             {
                 cnn.Open();
-                string query = "INSERT INTO USERS (Name, email, password, gender) VALUES (" + "'" + name + "'" + "," + "'" + email + "'" + "," + "'" + password + "'" + "," + "'" + gender + "'" + ")";
+                string query = "INSERT INTO USERS (Name, email, salt, gender, hash) VALUES (" + "'" + name + "'" + "," + "'" + email + "'" + "," + "'" + salt + "'" + "," + "'" + gender + "'" + "," + "'" + hash + "'" + ")";
                 SqlCommand Insert;
                 Insert = new SqlCommand(query, cnn);
                 Insert.ExecuteNonQuery();
