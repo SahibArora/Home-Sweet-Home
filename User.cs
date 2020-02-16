@@ -114,7 +114,7 @@ namespace Home_Sweet_Home
                 } while (!flagEmail);
 
                 do {
-                    Console.WriteLine("Please enter the verification code: ");
+                    Console.WriteLine("Please enter the verification code: (if, didn't receive enter any value to follow the program)");
                     verification_code_check = Int32.Parse(Console.ReadLine());
                     if (verification_code != verification_code_check)
                     {
