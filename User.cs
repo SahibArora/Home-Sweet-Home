@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Net.Mail;
+using System.Net;
 
 namespace Home_Sweet_Home
 {
@@ -29,11 +31,11 @@ namespace Home_Sweet_Home
 
         public void register() {
             try {
-                SQLClass sql = new SQLClass();
+                //SQLClass sql = new SQLClass();
 
                 Console.WriteLine("\nRegister\n");
 
-                int flagName = 0, flagGender = 0, flagPassword = 0 ;
+                /*int flagName = 0, flagGender = 0, flagPassword = 0 ;
                 string userPassword = null, confirmPassword = null;
 
                 Console.WriteLine("Please Enter your name -> ");
@@ -86,11 +88,14 @@ namespace Home_Sweet_Home
                 } while (flagPassword != 1);
                 salt = createSalt(10);
                 hash = generateSHA256Hash(userPassword, salt);
+                */
+                Console.WriteLine("Please enter your email: ");
+                email = Console.ReadLine();
+                sendEmailVerificationCode(email);
 
-                sql.insertUser(name,"xxxx",salt,gender,hash);
             }
             catch (Exception e) {
-                Console.WriteLine("Encountered an Error!", e);
+                Console.WriteLine(e);
             }
         }
 
@@ -116,6 +121,34 @@ namespace Home_Sweet_Home
             byte[] hash = sha256hashString.ComputeHash(bytes);
             // Converting it to string and returning!
             return System.Convert.ToBase64String(hash);
+        }
+
+        public void sendEmailVerificationCode(string email) {
+            // Random Code
+            try
+            {
+                int code = 0;
+                Random num = new Random();
+                code = num.Next(321, 23543);
+                string code_string = Convert.ToString(code);
+                // Email
+                MailMessage msg = new MailMessage();
+                SmtpClient sc = new SmtpClient();
+                msg.From = new MailAddress("your email");
+                msg.To.Add(new MailAddress(email));
+                msg.Subject = "Email Verification";
+                msg.Body = "Your verification code is: " + code_string;
+                sc.Port = 587;
+                sc.Host = "smtp.gmail.com";
+                sc.EnableSsl = true;
+                sc.UseDefaultCredentials = false;
+                sc.Credentials = new NetworkCredential("your email", "your password");
+                sc.DeliveryMethod = SmtpDeliveryMethod.Network;
+                sc.Send(msg);
+            }
+            catch (Exception e) {
+                Console.WriteLine(e);
+            }
         }
     }
 }
