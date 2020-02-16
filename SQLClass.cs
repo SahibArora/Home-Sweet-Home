@@ -124,7 +124,7 @@ namespace Home_Sweet_Home
         public bool insertUser(string name,
         string email,
         string salt,
-        char gender,
+        string gender,
         string hash) {
 
             SqlConnection cnn = new SqlConnection(connectionString);
