@@ -31,7 +31,7 @@ namespace Home_Sweet_Home
 
         public void register() {
             try {
-                //SQLClass sql = new SQLClass();
+                SQLClass sql = new SQLClass();
 
                 Console.WriteLine("\nRegister\n");
 
@@ -93,18 +93,21 @@ namespace Home_Sweet_Home
                 email = Console.ReadLine();
                 verification_code = sendEmailVerificationCode(email);
 
-                Console.WriteLine("Please enter the verification code: ");
-                verification_code_check = Int32.Parse(Console.ReadLine());
+                do {
+                    Console.WriteLine("Please enter the verification code: ");
+                    verification_code_check = Int32.Parse(Console.ReadLine());
+                    if (verification_code != verification_code_check) {
+                        Console.WriteLine("Code does not match!\n");
+                        Console.WriteLine("Do you want a new code? (Y/N) \n");
+                        string ans = Console.ReadLine();
+                        if (ans == "Y" || ans == "y") {
+                            verification_code = sendEmailVerificationCode(email);
+                        }
+                    }
+                } while (verification_code != verification_code_check);
 
-                if (verification_code == verification_code_check)
-                {
-                    Console.WriteLine("Succefully Register!");
-                }
-                else {
-                    Console.WriteLine("Code does not match!");
-                }
-
-
+                //sql.insertUser(name,email,salt,gender,hash);
+                Console.WriteLine("Succefully Register!");
             }
             catch (Exception e) {
                 Console.WriteLine(e);
@@ -146,7 +149,7 @@ namespace Home_Sweet_Home
                 // Email
                 MailMessage msg = new MailMessage();
                 SmtpClient sc = new SmtpClient();
-                msg.From = new MailAddress("YOUR EMAIL");
+                msg.From = new MailAddress("home.sweet.home.the.year.2.0.2.0@gmail.com");
                 msg.To.Add(new MailAddress(email));
                 msg.Subject = "Email Verification";
                 msg.Body = "Your verification code is: " + code_string;
@@ -154,7 +157,7 @@ namespace Home_Sweet_Home
                 sc.Host = "smtp.gmail.com";
                 sc.EnableSsl = true;
                 sc.UseDefaultCredentials = false;
-                sc.Credentials = new NetworkCredential("YOUR EMAIL", "YOUR PASSWORD");
+                sc.Credentials = new NetworkCredential("home.sweet.home.the.year.2.0.2.0@gmail.com", "XXXXXXXXXXX");
                 sc.DeliveryMethod = SmtpDeliveryMethod.Network;
                 sc.Send(msg);
 
