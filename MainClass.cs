@@ -22,6 +22,11 @@ namespace Home_Sweet_Home
                     User u = new User();
                     u.register();
                 }
+                if (option == 2) {
+
+                    SQLClass sql = new SQLClass();
+                    sql.login("sahibarora1997@gmail.com", "Sahib@123");
+                }
             } while (option != 0);
 
             // REGISTER or LOG-IN

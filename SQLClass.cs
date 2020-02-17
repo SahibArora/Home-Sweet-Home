@@ -123,8 +123,7 @@ namespace Home_Sweet_Home
             return true;
         }
 
-        // Passwords yet to be hashed!!
-
+        // Checks if the email already exists in the database!
         public bool uniqueEmail(string email) {
             SqlConnection cnn = new SqlConnection(connectionString);
             int i = 0;
@@ -173,30 +172,58 @@ namespace Home_Sweet_Home
             }
         }
 
-        // GET FUNCTIONS
+        //GET FUNCTIONS
 
-        /*public ArrayList getUsers() {
+        public bool login(string email, string password) {
+
+            // to use hash function to validate the password!
+            User u = new User();
+
             SqlConnection cnn = new SqlConnection(connectionString);
+            bool flagEmailLogin = false;
+            string salt = null, hashDatabase = null, hash = null;
+
             try
             {
                 cnn.Open();
-                string query = "SELECT name, email, gender, salt, hash from users";
-                SqlCommand get;
-                get = new SqlCommand(query, cnn);
-                get.ExecuteNonQuery();
-                get.Dispose();
-                 
+                string query = "select email,salt,hash from users";
+                SqlCommand getUser;
+                getUser = new SqlCommand(query, cnn);
+                SqlDataReader reader = getUser.ExecuteReader();
+                
+                while (reader.Read())
+                {
+                    if (reader.GetString(0).ToString().CompareTo(email) == 0)
+                    {
+                        salt = reader.GetString(1).ToString();
+                        hashDatabase = reader.GetString(2).ToString();
+
+                        flagEmailLogin = true;
+                    }
+                }
+
+                if (!flagEmailLogin)
+                {
+                    Console.WriteLine("E-mail does not exists in the system!");
+                }
+
+                hash = u.generateSHA256Hash(password,salt);
+
+                if (hashDatabase.CompareTo(hash) == 0) {
+                    Console.WriteLine("Successfully Registered!");
+                }
+                else {
+                    Console.WriteLine("Invalid Password!");
+                }
+
+                cnn.Close();
+                return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                return false;
             }
-            finally
-            {
-                cnn.Close();
-            }
-            return ;
-        }*/
+        }
 
         // code the delete function
         // Delete queries will be written once, primary and foriegn keys will be identified!
