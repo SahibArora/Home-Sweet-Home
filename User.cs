@@ -30,6 +30,8 @@ namespace Home_Sweet_Home
             hash = null;
         }
 
+        // REGISTER FUNCTION
+
         public void register() {
             try {
                 SQLClass sql = new SQLClass();
@@ -119,7 +121,7 @@ namespace Home_Sweet_Home
                     if (verification_code != verification_code_check)
                     {
                         Console.WriteLine("Code does not match!\n");
-                        Console.WriteLine("Do you want a new code? (Y/N) \n");
+                        Console.WriteLine("Do you want a new code? (Y/ any value) \n");
                         string ans = Console.ReadLine();
                         if (ans == "Y" || ans == "y")
                         {
@@ -139,6 +141,8 @@ namespace Home_Sweet_Home
             }
         }
 
+        // REGISTER SUPPORTING FUNCTIONS ---
+
         // Deaclaring a function to generate Salt for User Passwords..
         public string createSalt(int size) {
             var rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
@@ -153,7 +157,6 @@ namespace Home_Sweet_Home
         public String generateSHA256Hash(string pass, string salt) {
             // generating bytes of password + salt.
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(pass + salt);
-            byte[] bytes1 = System.Text.Encoding.UTF8.GetBytes(pass + salt);
             // Using SHA256MAnaged to generate hash Value;
             System.Security.Cryptography.SHA256Managed sha256hashString =
                 new System.Security.Cryptography.SHA256Managed();
@@ -163,6 +166,7 @@ namespace Home_Sweet_Home
             return System.Convert.ToBase64String(hash);
         }
 
+        // Sendinhg email verification codes and checking if the email exist (only in few possible cases)
         public int sendEmailVerificationCode(string email) {
             // Random Code
             try
@@ -182,7 +186,7 @@ namespace Home_Sweet_Home
                 sc.Host = "smtp.gmail.com";
                 sc.EnableSsl = true;
                 sc.UseDefaultCredentials = false;
-                sc.Credentials = new NetworkCredential("home.sweet.home.the.year.2.0.2.0@gmail.com", "XXXXXX");
+                sc.Credentials = new NetworkCredential("home.sweet.home.the.year.2.0.2.0@gmail.com", "XXXXX");
                 sc.DeliveryMethod = SmtpDeliveryMethod.Network;
                 sc.Send(msg);
 
@@ -193,6 +197,7 @@ namespace Home_Sweet_Home
             }
         }
 
+        // Regex for email verification
         public bool IsValidEmail(string emailaddress)
         {
             try
@@ -210,5 +215,10 @@ namespace Home_Sweet_Home
                 return false;
             }
         }
+
+
+        // Login Function
+
+        
     }
 }

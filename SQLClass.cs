@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data.SqlClient;
+using System.Collections;
 
 namespace Home_Sweet_Home
 {
@@ -31,6 +32,8 @@ namespace Home_Sweet_Home
                 cnn.Close();
             }
         }
+
+        // INSERT FUNCTIONS
 
         // Code the insert function for the table, get the table name as parameter.
         public bool insertHome(string announcement,
@@ -147,6 +150,31 @@ namespace Home_Sweet_Home
             }
             return true;
         }
+
+        // GET FUNCTIONS
+
+        /*public ArrayList getUsers() {
+            SqlConnection cnn = new SqlConnection(connectionString);
+            try
+            {
+                cnn.Open();
+                string query = "SELECT name, email, gender, salt, hash from users";
+                SqlCommand get;
+                get = new SqlCommand(query, cnn);
+                get.ExecuteNonQuery();
+                get.Dispose();
+                 
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                cnn.Close();
+            }
+            return ;
+        }*/
 
         // code the delete function
         // Delete queries will be written once, primary and foriegn keys will be identified!
