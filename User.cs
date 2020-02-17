@@ -104,6 +104,12 @@ namespace Home_Sweet_Home
                     {
                         Console.WriteLine("Incorrect E-mail address!");
                     }
+
+                    flagEmail = sql.uniqueEmail(email);
+
+                    if (!flagEmail) {
+                        Console.WriteLine("Email already exists!");
+                    }
                     else
                     {
                         verification_code = sendEmailVerificationCode(email);
@@ -186,7 +192,7 @@ namespace Home_Sweet_Home
                 sc.Host = "smtp.gmail.com";
                 sc.EnableSsl = true;
                 sc.UseDefaultCredentials = false;
-                sc.Credentials = new NetworkCredential("home.sweet.home.the.year.2.0.2.0@gmail.com", "XXXXX");
+                sc.Credentials = new NetworkCredential("home.sweet.home.the.year.2.0.2.0@gmail.com", "xxxxxxxxxx");
                 sc.DeliveryMethod = SmtpDeliveryMethod.Network;
                 sc.Send(msg);
 

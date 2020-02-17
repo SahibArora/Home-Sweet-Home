@@ -124,6 +124,30 @@ namespace Home_Sweet_Home
         }
 
         // Passwords yet to be hashed!!
+
+        public bool uniqueEmail(string email) {
+            SqlConnection cnn = new SqlConnection(connectionString);
+            int i = 0;
+            try
+            {
+                cnn.Open();
+                string query = "select email from users";
+                SqlCommand Insert;
+                Insert = new SqlCommand(query, cnn);
+                SqlDataReader reader =  Insert.ExecuteReader();
+                while (reader.Read()) {
+                    if (reader[i].ToString().CompareTo(email) == 0) {
+                        return false;
+                    }
+                    i++;
+                }
+                cnn.Close();
+                return true;
+            }catch (Exception e) {
+                return false;
+            }
+        }
+
         public bool insertUser(string name,
         string email,
         string salt,
@@ -139,16 +163,14 @@ namespace Home_Sweet_Home
                 Insert = new SqlCommand(query, cnn);
                 Insert.ExecuteNonQuery();
                 Insert.Dispose();
+                cnn.Close();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                return false;
             }
-            finally
-            {
-                cnn.Close();
-            }
-            return true;
         }
 
         // GET FUNCTIONS
