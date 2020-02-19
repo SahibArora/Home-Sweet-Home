@@ -55,16 +55,43 @@ namespace Home_Sweet_Home
                     // password will be asked if e-mail valid
                     logedIn = sql.login(email);
 
-                    /*if (logedIn) {
-                        
+                    if (logedIn) {
+                        int loggedOption = 0;
+                        bool loggedOptionCheck = false;
+
                         do
                         {
-                            switch ()
+                            Console.WriteLine("1 - Create a new Home");
+                            Console.WriteLine("2 - Enter to an existing Home");
+                            Console.WriteLine("0 - Log Out");
+                            do
                             {
+                                try
+                                {
+                                    Console.WriteLine("\nPlease enter your option: ");
+                                    loggedOption = Int32.Parse(Console.ReadLine());
+                                    loggedOptionCheck = true;
+                                }
+                                catch (Exception e)
+                                {
+                                    Console.WriteLine("It can only be Integer.");
+                                }
+                            } while (!loggedOptionCheck);
 
+                            switch (loggedOption)
+                            {
+                                case 1:
+                                    Console.WriteLine("You are in Create new Home!");
+                                    break;
+                                case 2:
+                                    Console.WriteLine("You are in enter Home option!");
+                                    break;
+                                case 0:
+                                    Console.WriteLine("You are logged out!");
+                                    break;
                             }
-                        } while ();
-                    }*/
+                        } while (loggedOption != 0);
+                    }
                 }
             } while (option != 0);
 
