@@ -6,7 +6,8 @@ namespace Home_Sweet_Home
     {
         static void Main(string[] args)
         {
-            int option;
+            int option = 0;
+            bool optionCheck = false;
             
             do
             {
@@ -14,9 +15,17 @@ namespace Home_Sweet_Home
                 Console.WriteLine("2 - Login");
                 Console.WriteLine("\n0 - Exit");
 
-                Console.WriteLine("\nPlease enter your option: ");
-                
-                option = Int32.Parse(Console.ReadLine());
+                do {
+
+                    try {
+                        Console.WriteLine("\nPlease enter your option: ");
+                        option = Int32.Parse(Console.ReadLine());
+                        optionCheck = true;
+                    }
+                    catch (Exception e) {
+                        Console.WriteLine("It can only be Integer.");
+                    }
+                } while (!optionCheck);
 
                 if (option == 1) {
                     User u = new User();
@@ -24,7 +33,7 @@ namespace Home_Sweet_Home
                 }
                 if (option == 2) {
 
-                    bool flagEmail = false;
+                    bool flagEmail = false, logedIn = false;
                     string email = null;
 
                     SQLClass sql = new SQLClass();
@@ -44,7 +53,18 @@ namespace Home_Sweet_Home
                     } while (!flagEmail);
 
                     // password will be asked if e-mail valid
-                    sql.login(email);
+                    logedIn = sql.login(email);
+
+                    /*if (logedIn) {
+                        
+                        do
+                        {
+                            switch ()
+                            {
+
+                            }
+                        } while ();
+                    }*/
                 }
             } while (option != 0);
 
