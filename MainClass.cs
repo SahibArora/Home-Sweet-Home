@@ -24,8 +24,27 @@ namespace Home_Sweet_Home
                 }
                 if (option == 2) {
 
+                    bool flagEmail = false;
+                    string email = null;
+
                     SQLClass sql = new SQLClass();
-                    sql.login("sahibarora1997@gmail.com", "Sahib@123");
+                    User u = new User();
+
+                    do
+                    {
+                        Console.WriteLine("Please enter your email: ");
+                        email = Console.ReadLine();
+                        // Using function from users class!
+                        flagEmail = u.IsValidEmail(email);
+
+                        if (!flagEmail)
+                        {
+                            Console.WriteLine("Incorrect E-mail address!");
+                        }
+                    } while (!flagEmail);
+
+                    // password will be asked if e-mail valid
+                    sql.login(email);
                 }
             } while (option != 0);
 

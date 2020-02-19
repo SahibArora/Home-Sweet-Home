@@ -174,14 +174,14 @@ namespace Home_Sweet_Home
 
         //GET FUNCTIONS
 
-        public bool login(string email, string password) {
+        public bool login(string email) {
 
             // to use hash function to validate the password!
             User u = new User();
 
             SqlConnection cnn = new SqlConnection(connectionString);
             bool flagEmailLogin = false;
-            string salt = null, hashDatabase = null, hash = null;
+            string salt = null, hashDatabase = null, hash = null, password = null;
 
             try
             {
@@ -206,11 +206,15 @@ namespace Home_Sweet_Home
                 {
                     Console.WriteLine("E-mail does not exists in the system!");
                 }
+                else {
+                    Console.WriteLine("Please enter your Password: ");
+                    password = Console.ReadLine();
+                }
 
                 hash = u.generateSHA256Hash(password,salt);
 
                 if (hashDatabase.CompareTo(hash) == 0) {
-                    Console.WriteLine("Successfully Registered!");
+                    Console.WriteLine("Successfully Logged In!");
                 }
                 else {
                     Console.WriteLine("Invalid Password!");
