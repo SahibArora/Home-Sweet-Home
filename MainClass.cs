@@ -8,10 +8,13 @@ namespace Home_Sweet_Home
         {
             int option = 0;
             bool optionCheck = false;
-            
+            // User
+
+            User u = new User();
+
             do
             {
-                Console.WriteLine("1 - Register");
+                Console.WriteLine("\n1 - Register");
                 Console.WriteLine("2 - Login");
                 Console.WriteLine("\n0 - Exit");
 
@@ -28,32 +31,14 @@ namespace Home_Sweet_Home
                 } while (!optionCheck);
 
                 if (option == 1) {
-                    User u = new User();
+                    
                     u.register();
                 }
                 if (option == 2) {
 
-                    bool flagEmail = false, logedIn = false;
-                    string email = null;
+                    bool logedIn = false;
 
-                    SQLClass sql = new SQLClass();
-                    User u = new User();
-
-                    do
-                    {
-                        Console.WriteLine("Please enter your email: ");
-                        email = Console.ReadLine();
-                        // Using function from users class!
-                        flagEmail = u.IsValidEmail(email);
-
-                        if (!flagEmail)
-                        {
-                            Console.WriteLine("Incorrect E-mail address!");
-                        }
-                    } while (!flagEmail);
-
-                    // password will be asked if e-mail valid
-                    logedIn = sql.login(email);
+                    logedIn = u.login();
 
                     if (logedIn) {
                         int loggedOption = 0;
@@ -61,7 +46,7 @@ namespace Home_Sweet_Home
 
                         do
                         {
-                            Console.WriteLine("1 - Create a new Home");
+                            Console.WriteLine("\n1 - Create a new Home");
                             Console.WriteLine("2 - Enter to an existing Home");
                             Console.WriteLine("0 - Log Out");
                             do
@@ -81,7 +66,9 @@ namespace Home_Sweet_Home
                             switch (loggedOption)
                             {
                                 case 1:
-                                    Console.WriteLine("You are in Create new Home!");
+                                    Home h = new Home();
+                                    Console.WriteLine("\nYou are in Create new Home!\n");
+                                    h.register();
                                     break;
                                 case 2:
                                     Console.WriteLine("You are in enter Home option!");

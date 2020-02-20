@@ -34,6 +34,54 @@ namespace Home_Sweet_Home
             length_of_home = 0.0;
             width_of_home = 0.0;
         }
+
+        public bool register() {
+            try {
+
+                bool widthFlag = false, lengthFlag = false;
+
+                Console.WriteLine("Please enter the name of your Home: ");
+                name_home = Console.ReadLine();
+
+                Console.WriteLine("Please enter the address: ");
+                address_home = Console.ReadLine();
+
+                Console.WriteLine("Please enter the description (Maximum 100 characters): ");
+                description_home = Console.ReadLine();
+
+                do
+                {
+                    try
+                    {
+                        Console.WriteLine("Please enter the length of your home: ");
+                        length_of_home = Double.Parse(Console.ReadLine());
+                        lengthFlag = true;
+                    }
+                    catch (Exception e) {
+                        lengthFlag = false;
+                    }
+                } while (!lengthFlag);
+
+                do
+                {
+                    try
+                    {
+                        Console.WriteLine("Please enter the width of your home: ");
+                        width_of_home = Double.Parse(Console.ReadLine());
+                        widthFlag = true;
+                    }
+                    catch (Exception e)
+                    {
+                        widthFlag = false;
+                    }
+                } while (!widthFlag);
+
+                return true;
+            }
+            catch (Exception e) {
+                return false;
+            }
+        }
     }
 
     class Area_In_Home {

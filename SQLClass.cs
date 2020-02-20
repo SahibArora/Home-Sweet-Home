@@ -33,6 +33,96 @@ namespace Home_Sweet_Home
             }
         }
 
+        // Checks if the email already exists in the database!
+        public bool uniqueEmail(string email)
+        {
+            SqlConnection cnn = new SqlConnection(connectionString);
+            int i = 0;
+            try
+            {
+                cnn.Open();
+                string query = "select email from users";
+                SqlCommand Insert;
+                Insert = new SqlCommand(query, cnn);
+                SqlDataReader reader = Insert.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (reader[i].ToString().CompareTo(email) == 0)
+                    {
+                        return false;
+                    }
+                    i++;
+                }
+                cnn.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        //GET FUNCTIONS
+
+        public bool login(string email)
+        {
+
+            // to use hash function to validate the password!
+            User u = new User();
+
+            SqlConnection cnn = new SqlConnection(connectionString);
+            bool flagEmailLogin = false;
+            string salt = null, hashDatabase = null, hash = null, password = null;
+
+            try
+            {
+                cnn.Open();
+                string query = "select email,salt,hash from users";
+                SqlCommand getUser;
+                getUser = new SqlCommand(query, cnn);
+                SqlDataReader reader = getUser.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader.GetString(0).ToString().CompareTo(email) == 0)
+                    {
+                        salt = reader.GetString(1).ToString();
+                        hashDatabase = reader.GetString(2).ToString();
+
+                        flagEmailLogin = true;
+                    }
+                }
+
+                if (!flagEmailLogin)
+                {
+                    Console.WriteLine("E-mail does not exists in the system!");
+                }
+                else
+                {
+                    Console.WriteLine("Please enter your Password: ");
+                    password = Console.ReadLine();
+                }
+
+                hash = u.generateSHA256Hash(password, salt);
+
+                if (hashDatabase.CompareTo(hash) == 0)
+                {
+                    Console.WriteLine("Successfully Logged In!");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Password!");
+                }
+
+                cnn.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
         // INSERT FUNCTIONS
 
         // Code the insert function for the table, get the table name as parameter.
@@ -123,30 +213,6 @@ namespace Home_Sweet_Home
             return true;
         }
 
-        // Checks if the email already exists in the database!
-        public bool uniqueEmail(string email) {
-            SqlConnection cnn = new SqlConnection(connectionString);
-            int i = 0;
-            try
-            {
-                cnn.Open();
-                string query = "select email from users";
-                SqlCommand Insert;
-                Insert = new SqlCommand(query, cnn);
-                SqlDataReader reader =  Insert.ExecuteReader();
-                while (reader.Read()) {
-                    if (reader[i].ToString().CompareTo(email) == 0) {
-                        return false;
-                    }
-                    i++;
-                }
-                cnn.Close();
-                return true;
-            }catch (Exception e) {
-                return false;
-            }
-        }
-
         public bool insertUser(string name,
         string email,
         string salt,
@@ -168,63 +234,6 @@ namespace Home_Sweet_Home
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return false;
-            }
-        }
-
-        //GET FUNCTIONS
-
-        public bool login(string email) {
-
-            // to use hash function to validate the password!
-            User u = new User();
-
-            SqlConnection cnn = new SqlConnection(connectionString);
-            bool flagEmailLogin = false;
-            string salt = null, hashDatabase = null, hash = null, password = null;
-
-            try
-            {
-                cnn.Open();
-                string query = "select email,salt,hash from users";
-                SqlCommand getUser;
-                getUser = new SqlCommand(query, cnn);
-                SqlDataReader reader = getUser.ExecuteReader();
-                
-                while (reader.Read())
-                {
-                    if (reader.GetString(0).ToString().CompareTo(email) == 0)
-                    {
-                        salt = reader.GetString(1).ToString();
-                        hashDatabase = reader.GetString(2).ToString();
-
-                        flagEmailLogin = true;
-                    }
-                }
-
-                if (!flagEmailLogin)
-                {
-                    Console.WriteLine("E-mail does not exists in the system!");
-                }
-                else {
-                    Console.WriteLine("Please enter your Password: ");
-                    password = Console.ReadLine();
-                }
-
-                hash = u.generateSHA256Hash(password,salt);
-
-                if (hashDatabase.CompareTo(hash) == 0) {
-                    Console.WriteLine("Successfully Logged In!");
-                }
-                else {
-                    Console.WriteLine("Invalid Password!");
-                }
-
-                cnn.Close();
-                return true;
-            }
-            catch (Exception e)
-            {
                 return false;
             }
         }

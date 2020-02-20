@@ -139,7 +139,7 @@ namespace Home_Sweet_Home
                     }
                 } while (!flagCode);
 
-                //sql.insertUser(name,email,salt,gender,hash);
+                sql.insertUser(name,email,salt,gender,hash);
                 Console.WriteLine("Succefully Register!");
             }
             catch (Exception e) {
@@ -192,7 +192,7 @@ namespace Home_Sweet_Home
                 sc.Host = "smtp.gmail.com";
                 sc.EnableSsl = true;
                 sc.UseDefaultCredentials = false;
-                sc.Credentials = new NetworkCredential("home.sweet.home.the.year.2.0.2.0@gmail.com", "xxxxxxxxxx");
+                sc.Credentials = new NetworkCredential("home.sweet.home.the.year.2.0.2.0@gmail.com", "mynameissahibarora");
                 sc.DeliveryMethod = SmtpDeliveryMethod.Network;
                 sc.Send(msg);
 
@@ -225,6 +225,30 @@ namespace Home_Sweet_Home
 
         // Login Function
 
-        
+        public bool login() {
+
+            bool flagEmail = false, logedIn = false;
+
+            SQLClass sql = new SQLClass();
+
+            do
+            {
+                Console.WriteLine("Please enter your email: ");
+                email = Console.ReadLine();
+                // Using function from users class!
+                flagEmail = IsValidEmail(email);
+
+                if (!flagEmail)
+                {
+                    Console.WriteLine("Incorrect E-mail address!");
+                }
+            } while (!flagEmail);
+
+            logedIn = sql.login(email);
+            
+            return logedIn;
+
+        }
+
     }
 }
