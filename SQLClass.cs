@@ -42,12 +42,42 @@ namespace Home_Sweet_Home
             {
                 cnn.Open();
                 string query = "select email from users";
-                SqlCommand Insert;
-                Insert = new SqlCommand(query, cnn);
-                SqlDataReader reader = Insert.ExecuteReader();
+                SqlCommand get;
+                get = new SqlCommand(query, cnn);
+                SqlDataReader reader = get.ExecuteReader();
                 while (reader.Read())
                 {
-                    if (reader[i].ToString().CompareTo(email) == 0)
+                    if (reader[i].ToString().Equals(email))
+                    {
+                        return false;
+                    }
+                    i++;
+                }
+                cnn.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        // To check if the Home Name is Unique.
+
+        public bool uniqueHomeName(string home_name)
+        {
+            SqlConnection cnn = new SqlConnection(connectionString);
+            int i = 0;
+            try
+            {
+                cnn.Open();
+                string query = "select home_name from home";
+                SqlCommand get;
+                get = new SqlCommand(query, cnn);
+                SqlDataReader reader = get.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (reader[i].ToString().Equals(home_name))
                     {
                         return false;
                     }
@@ -84,7 +114,7 @@ namespace Home_Sweet_Home
 
                 while (reader.Read())
                 {
-                    if (reader.GetString(0).ToString().CompareTo(email) == 0)
+                    if (reader.GetString(0).ToString().Equals(email))
                     {
                         salt = reader.GetString(1).ToString();
                         hashDatabase = reader.GetString(2).ToString();
@@ -105,7 +135,7 @@ namespace Home_Sweet_Home
 
                 hash = u.generateSHA256Hash(password, salt);
 
-                if (hashDatabase.CompareTo(hash) == 0)
+                if (hashDatabase.Equals(hash))
                 {
                     Console.WriteLine("Successfully Logged In!");
                 }

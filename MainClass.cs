@@ -23,6 +23,7 @@ namespace Home_Sweet_Home
                     try {
                         Console.WriteLine("\nPlease enter your option: ");
                         option = Int32.Parse(Console.ReadLine());
+                        Console.WriteLine();
                         optionCheck = true;
                     }
                     catch (Exception e) {
@@ -55,6 +56,7 @@ namespace Home_Sweet_Home
                                 {
                                     Console.WriteLine("\nPlease enter your option: ");
                                     loggedOption = Int32.Parse(Console.ReadLine());
+                                    Console.WriteLine();
                                     loggedOptionCheck = true;
                                 }
                                 catch (Exception e)
@@ -67,7 +69,7 @@ namespace Home_Sweet_Home
                             {
                                 case 1:
                                     Home h = new Home();
-                                    Console.WriteLine("\nYou are in Create new Home!\n");
+                                    Console.WriteLine("You are in Create new Home!\n");
                                     h.register();
                                     break;
                                 case 2:

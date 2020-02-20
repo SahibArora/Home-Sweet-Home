@@ -38,10 +38,18 @@ namespace Home_Sweet_Home
         public bool register() {
             try {
 
-                bool widthFlag = false, lengthFlag = false;
+                bool widthFlag = false, lengthFlag = false, flagHomeName = false;
 
-                Console.WriteLine("Please enter the name of your Home: ");
-                name_home = Console.ReadLine();
+                SQLClass sql = new SQLClass();
+
+                do {
+                    Console.WriteLine("Please enter the name of your Home: ");
+                    name_home = Console.ReadLine();
+                    flagHomeName = sql.uniqueHomeName(name_home);
+                    if (!flagHomeName) {
+                        Console.WriteLine("This name is already taken, please choose another one!");
+                    }
+                } while (!flagHomeName);
 
                 Console.WriteLine("Please enter the address: ");
                 address_home = Console.ReadLine();
