@@ -36,9 +36,10 @@ namespace Home_Sweet_Home
         }
 
         public bool register() {
-            try {
 
-                bool widthFlag = false, lengthFlag = false, flagHomeName = false;
+            bool widthFlag = false, lengthFlag = false, flagHomeName = false, flagInsert = false;
+
+            try { 
 
                 SQLClass sql = new SQLClass();
 
@@ -84,10 +85,15 @@ namespace Home_Sweet_Home
                     }
                 } while (!widthFlag);
 
-                return true;
+                flagInsert = sql.insertHome(null,name_home, address_home,description_home,length_of_home,width_of_home);
+
+                if (flagInsert) {
+                    Console.WriteLine("\nHome " + name_home +  " created\n");
+                }
+                return flagInsert;
             }
             catch (Exception e) {
-                return false;
+                return flagInsert;
             }
         }
     }

@@ -94,6 +94,7 @@ namespace Home_Sweet_Home
 
         //GET FUNCTIONS
 
+            // User Login
         public bool login(string email)
         {
 
@@ -174,15 +175,14 @@ namespace Home_Sweet_Home
                 Insert = new SqlCommand(query, cnn);
                 Insert.ExecuteNonQuery();
                 Insert.Dispose();
+                cnn.Close();
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                return false;
             }
-            finally {
-                cnn.Close();
-            }
-            return true;
         }
 
         public bool insertArea(string name_area,
