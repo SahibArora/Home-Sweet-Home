@@ -13,7 +13,7 @@ namespace Home_Sweet_Home
         string announcement;
 
         // normal data members
-        string name_home;
+        public string name_home;
         string address_home;
         string description_home;
         int no_of_member_home;
@@ -85,7 +85,7 @@ namespace Home_Sweet_Home
                     }
                 } while (!widthFlag);
 
-                flagInsert = sql.insertHome(null,name_home, address_home,description_home,length_of_home,width_of_home);
+                flagInsert = sql.insertHome(null, name_home, address_home, description_home, length_of_home, width_of_home);
 
                 if (flagInsert) {
                     Console.WriteLine("\nHome " + name_home +  " created\n");

@@ -14,7 +14,7 @@ namespace Home_Sweet_Home
 
         // normal data members
         string name;
-        string email;
+        public string email;
         string salt; // generate a salt for password before saving it to database (one-step-to-security)
         string gender;
         string hash; 
@@ -32,7 +32,7 @@ namespace Home_Sweet_Home
 
         // REGISTER FUNCTION
 
-        public void register() {
+        public User register() {
             try {
                 SQLClass sql = new SQLClass();
 
@@ -141,9 +141,12 @@ namespace Home_Sweet_Home
 
                 sql.insertUser(name,email,salt,gender,hash);
                 Console.WriteLine("Succefully Register!");
+
+                return this;
             }
             catch (Exception e) {
                 Console.WriteLine(e);
+                return this;
             }
         }
 
@@ -199,6 +202,7 @@ namespace Home_Sweet_Home
                 return code;
             }
             catch (Exception e) {
+                Console.WriteLine(e);
                 return 0;
             }
         }
@@ -225,18 +229,19 @@ namespace Home_Sweet_Home
 
         // Login Function
 
-        public bool login() {
+        public User login() {
 
-            bool flagEmail = false, logedIn = false;
+            bool flagEmail = false, logedIn = false; 
+            string Useremail = null;
 
             SQLClass sql = new SQLClass();
 
             do
             {
                 Console.WriteLine("Please enter your email: ");
-                email = Console.ReadLine();
+                Useremail = Console.ReadLine();
                 // Using function from users class!
-                flagEmail = IsValidEmail(email);
+                flagEmail = IsValidEmail(Useremail);
 
                 if (!flagEmail)
                 {
@@ -244,10 +249,13 @@ namespace Home_Sweet_Home
                 }
             } while (!flagEmail);
 
-            logedIn = sql.login(email);
-            
-            return logedIn;
+            logedIn = sql.login(Useremail);
 
+            if (logedIn)
+            {
+                email = Useremail;
+            }
+            return this;
         }
 
     }

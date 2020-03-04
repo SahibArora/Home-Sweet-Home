@@ -37,7 +37,6 @@ namespace Home_Sweet_Home
         public bool uniqueEmail(string email)
         {
             SqlConnection cnn = new SqlConnection(connectionString);
-            int i = 0;
             try
             {
                 cnn.Open();
@@ -47,17 +46,17 @@ namespace Home_Sweet_Home
                 SqlDataReader reader = get.ExecuteReader();
                 while (reader.Read())
                 {
-                    if (reader[i].ToString().Equals(email))
+                    if (reader[0].ToString().Equals(email))
                     {
                         return false;
                     }
-                    i++;
                 }
                 cnn.Close();
                 return true;
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 return false;
             }
         }
@@ -67,7 +66,6 @@ namespace Home_Sweet_Home
         public bool uniqueHomeName(string home_name)
         {
             SqlConnection cnn = new SqlConnection(connectionString);
-            int i = 0;
             try
             {
                 cnn.Open();
@@ -77,11 +75,10 @@ namespace Home_Sweet_Home
                 SqlDataReader reader = get.ExecuteReader();
                 while (reader.Read())
                 {
-                    if (reader[i].ToString().Equals(home_name))
+                    if (reader[0].ToString().Equals(home_name))
                     {
                         return false;
                     }
-                    i++;
                 }
                 cnn.Close();
                 return true;
@@ -139,17 +136,19 @@ namespace Home_Sweet_Home
                 if (hashDatabase.Equals(hash))
                 {
                     Console.WriteLine("Successfully Logged In!");
+                    cnn.Close();
+                    return true;
                 }
                 else
                 {
                     Console.WriteLine("Invalid Password!");
+                    cnn.Close();
+                    return false;
                 }
-
-                cnn.Close();
-                return true;
             }
             catch (Exception e)
             {
+                cnn.Close();
                 return false;
             }
         }
@@ -181,6 +180,17 @@ namespace Home_Sweet_Home
             catch (Exception e)
             {
                 Console.WriteLine(e);
+                return false;
+            }
+        }
+
+        // add user to home
+
+        public bool addUserHome(string home_name, string user_name) {
+            try {
+
+                return true;
+            } catch (Exception e) {
                 return false;
             }
         }

@@ -28,22 +28,30 @@ namespace Home_Sweet_Home
                     }
                     catch (Exception e) {
                         Console.WriteLine("It can only be Integer.");
+                        optionCheck = false;
                     }
                 } while (!optionCheck);
 
                 if (option == 1) {
                     
-                    u.register();
+                    u = u.register();
+                    Console.WriteLine("Email: " + u.email);
+                    // to make the user object empty again - will be used in future 
+                    u = new User();
                 }
                 if (option == 2) {
 
                     bool logedIn = false;
 
-                    logedIn = u.login();
+                    u = u.login();
+
+                    logedIn = (u.email != null);
 
                     if (logedIn) {
                         int loggedOption = 0;
                         bool loggedOptionCheck = false;
+
+                        Console.WriteLine("\nWelcome " + u.email + "\n");
 
                         do
                         {
