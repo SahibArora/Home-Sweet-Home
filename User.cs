@@ -207,6 +207,34 @@ namespace Home_Sweet_Home
             }
         }
 
+        // Send email when a home is creatd on someone's email
+
+        public void sendEmailHome(string email, string home_name)
+        {
+            // Random Code
+            try
+            {
+                // Email
+                MailMessage msg = new MailMessage();
+                SmtpClient sc = new SmtpClient();
+                msg.From = new MailAddress("home.sweet.home.the.year.2.0.2.0@gmail.com");
+                msg.To.Add(new MailAddress(email));
+                msg.Subject = "New Home '" + home_name + "' Created";
+                msg.Body = "A new home '" + home_name + "' has been created at your id " + email + "!";
+                sc.Port = 587;
+                sc.Host = "smtp.gmail.com";
+                sc.EnableSsl = true;
+                sc.UseDefaultCredentials = false;
+                sc.Credentials = new NetworkCredential("home.sweet.home.the.year.2.0.2.0@gmail.com", "mynameissahibarora");
+                sc.DeliveryMethod = SmtpDeliveryMethod.Network;
+                sc.Send(msg);
+            }
+            catch (Exception e)
+            {
+                
+            }
+        }
+
         // Regex for email verification
         public bool IsValidEmail(string emailaddress)
         {

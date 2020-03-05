@@ -86,6 +86,7 @@ namespace Home_Sweet_Home
                                         if (sql.addUserHome(u.email, h.name_home, 'a'))
                                         {
                                             Console.WriteLine(u.email + " is succefully added in " + h.name_home + " with admin rights!\n\n");
+                                            u.sendEmailHome(u.email,h.name_home);
                                         }
                                         else {
                                             Console.WriteLine("Unable to add " + u.email + " to " + h.name_home + "!\n\n");
