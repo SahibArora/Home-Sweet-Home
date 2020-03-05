@@ -186,11 +186,20 @@ namespace Home_Sweet_Home
 
         // add user to home
 
-        public bool addUserHome(string home_name, string user_name) {
+        public bool addUserHome(string email, string home_name, char permission = 'u') {
+            SqlConnection cnn = new SqlConnection(connectionString);
             try {
+                cnn.Open();
+                string query = "INSERT INTO USERHOME (email , Home_name , permission ) VALUES (" + "'" + email + "'" + "," + "'" + home_name + "'" + "," + "'" + permission + "'" + ")";
+                SqlCommand Insert;
+                Insert = new SqlCommand(query, cnn);
+                Insert.ExecuteNonQuery();
+                Insert.Dispose();
+                cnn.Close();
 
                 return true;
             } catch (Exception e) {
+                Console.WriteLine(e);
                 return false;
             }
         }

@@ -35,7 +35,7 @@ namespace Home_Sweet_Home
             width_of_home = 0.0;
         }
 
-        public bool register() {
+        public Home register() {
 
             bool widthFlag = false, lengthFlag = false, flagHomeName = false, flagInsert = false;
 
@@ -87,13 +87,18 @@ namespace Home_Sweet_Home
 
                 flagInsert = sql.insertHome(null, name_home, address_home, description_home, length_of_home, width_of_home);
 
-                if (flagInsert) {
-                    Console.WriteLine("\nHome " + name_home +  " created\n");
+                if (flagInsert)
+                {
+                    Console.WriteLine("\nHome " + name_home + " created\n");
                 }
-                return flagInsert;
+                else {
+                    Console.WriteLine("\n\nFailed--- \nHome " + name_home + " cannot be created due to above reason\n");
+                }
+                return this;
             }
             catch (Exception e) {
-                return flagInsert;
+                Home h = new Home();
+                return h;
             }
         }
     }
