@@ -195,8 +195,18 @@ namespace Home_Sweet_Home
                 Insert = new SqlCommand(query, cnn);
                 Insert.ExecuteNonQuery();
                 Insert.Dispose();
-                cnn.Close();
 
+
+                // increasing the number of member in the home
+
+                string query1 = "UPDATE home SET no_of_member = (no_of_member + 1) WHERE Home_Name = '" + home_name + "'" ;
+                
+                SqlCommand Update;
+                Update = new SqlCommand(query1, cnn);
+                Update.ExecuteNonQuery();
+                Update.Dispose();
+
+                cnn.Close();
                 return true;
             } catch (Exception e) {
                 Console.WriteLine(e);
