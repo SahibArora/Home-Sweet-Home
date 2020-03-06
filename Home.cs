@@ -8,7 +8,7 @@ namespace Home_Sweet_Home
     {
         // Functions/scope 
         List<Area_In_Home> area_of_home;
-        List<User> users;
+        List<string> users;
         // special functionalities of home.
         string announcement;
 
@@ -23,7 +23,7 @@ namespace Home_Sweet_Home
         // initializing
         public Home() {
             area_of_home = new List<Area_In_Home>();
-            users = new List<User>();
+            users = new List<string>();
 
             announcement = null;
 

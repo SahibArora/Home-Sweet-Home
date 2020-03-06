@@ -96,9 +96,18 @@ namespace Home_Sweet_Home
 
                                     break;
                                 case 2:
-                                    Console.WriteLine("You are in enter Home option!");
+                                    Console.WriteLine("Following are the list of home/s you are part off -\n");
+
+                                    SQLClass sql1 = new SQLClass();
+                                    u = sql1.getHomeOfUser(u);
+
+                                    for (int i = 0; i < u.homes.Count; i++) {
+                                        Console.WriteLine(i+1 + ". " + u.homes[i]);
+                                    }
+                                    Console.WriteLine("\n");
                                     break;
                                 case 0:
+                                    u = new User();
                                     Console.WriteLine("You are logged out!");
                                     break;
                             }

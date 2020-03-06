@@ -214,6 +214,32 @@ namespace Home_Sweet_Home
             }
         }
 
+
+        // get home of specific user
+
+        public User getHomeOfUser(User u) {
+            SqlConnection cnn = new SqlConnection(connectionString);
+            try {
+                cnn.Open();
+
+                string query = "SELECT home_name FROM userhome WHERE email = '" + u.email + "'";
+                SqlCommand getHome;
+                getHome = new SqlCommand(query, cnn);
+                SqlDataReader reader = getHome.ExecuteReader();
+
+                while (reader.Read()) {
+                    u.homes.Add(reader.GetString(0).ToString());
+                }
+                cnn.Close();
+
+                return u;
+            }
+            catch (Exception e) {
+                return u;
+            }
+        }
+
+
         public bool insertArea(string name_area,
         string description_area,
         double length_of_area,
