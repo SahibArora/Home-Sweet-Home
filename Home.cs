@@ -89,6 +89,7 @@ namespace Home_Sweet_Home
 
                 if (flagInsert)
                 {
+                    Console.Clear();
                     Console.WriteLine("\nHome " + name_home + " created\n");
                 }
                 else {

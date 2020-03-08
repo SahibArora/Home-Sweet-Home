@@ -140,7 +140,10 @@ namespace Home_Sweet_Home
                 } while (!flagCode);
 
                 sql.insertUser(name,email,salt,gender,hash);
-                Console.WriteLine("Succefully Register!");
+
+                Console.Clear();
+
+                Console.WriteLine("Succefully Registered!");
 
                 return this;
             }

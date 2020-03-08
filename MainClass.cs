@@ -25,6 +25,7 @@ namespace Home_Sweet_Home
                         option = Int32.Parse(Console.ReadLine());
                         Console.WriteLine();
                         optionCheck = true;
+                        Console.Clear();
                     }
                     catch (Exception e) {
                         Console.WriteLine("It can only be Integer.");
@@ -42,7 +43,8 @@ namespace Home_Sweet_Home
                 if (option == 2) {
 
                     bool logedIn = false;
-
+                    Console.Clear();
+                    Console.WriteLine("Log-In\n");
                     u = u.login();
 
                     logedIn = (u.email != null);
@@ -50,11 +52,11 @@ namespace Home_Sweet_Home
                     if (logedIn) {
                         int loggedOption = 0;
                         bool loggedOptionCheck = false;
-
-                        Console.WriteLine("\nWelcome " + u.email + "\n");
-
+                        
                         do
                         {
+                            Console.WriteLine("Welcome " + u.email + "\n");
+
                             Console.WriteLine("1 - Create a new Home");
                             Console.WriteLine("2 - Enter to an existing Home");
                             Console.WriteLine("0 - Log Out");
@@ -66,6 +68,7 @@ namespace Home_Sweet_Home
                                     loggedOption = Int32.Parse(Console.ReadLine());
                                     Console.WriteLine();
                                     loggedOptionCheck = true;
+                                    Console.Clear();
                                 }
                                 catch (Exception e)
                                 {
@@ -104,7 +107,9 @@ namespace Home_Sweet_Home
                                     for (int i = 0; i < u.homes.Count; i++) {
                                         Console.WriteLine(i+1 + ". " + u.homes[i]);
                                     }
-                                    Console.WriteLine("\n");
+                                    Console.WriteLine("\n Which one would you like to enter (1,2 or ...): ");
+                                    
+
                                     break;
                                 case 0:
                                     u = new User();

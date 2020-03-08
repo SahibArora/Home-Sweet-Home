@@ -136,6 +136,7 @@ namespace Home_Sweet_Home
                 if (hashDatabase.Equals(hash))
                 {
                     Console.WriteLine("Successfully Logged In!");
+                    Console.Clear();
                     cnn.Close();
                     return true;
                 }
