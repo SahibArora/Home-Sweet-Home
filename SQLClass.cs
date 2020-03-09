@@ -255,7 +255,16 @@ namespace Home_Sweet_Home
                 SqlDataReader reader = getHome.ExecuteReader();
 
                 while (reader.Read()) {
-                    u.homes.Add(reader.GetString(0).ToString());
+                    int flag = 0;
+                    for (int i = 0; i < u.homes.Count; i++) {
+                        if (reader.GetString(0).Equals(u.homes[i])) {
+                            flag = 1;
+                        }
+                    }
+                    if (flag == 0)
+                    {
+                        u.homes.Add(reader.GetString(0).ToString());
+                    }
                 }
                 cnn.Close();
 
