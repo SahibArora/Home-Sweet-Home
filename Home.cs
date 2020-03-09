@@ -102,6 +102,7 @@ namespace Home_Sweet_Home
                 return h;
             }
         }
+
     }
 
     class Area_In_Home {

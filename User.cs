@@ -289,5 +289,10 @@ namespace Home_Sweet_Home
             return this;
         }
 
+        public char checkPermission(string home_name, string email) { 
+            SQLClass sql = new SQLClass();
+            return sql.getPermission(home_name,email);
+        }
+
     }
 }

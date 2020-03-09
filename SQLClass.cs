@@ -154,6 +154,32 @@ namespace Home_Sweet_Home
             }
         }
 
+        // get permission of user
+
+        public char getPermission(string home_name, string email) {
+            SqlConnection cnn = new SqlConnection(connectionString);
+            char permission = '\0';
+            try
+            {
+                cnn.Open();
+
+                string query = "SELECT permission FROM userhome WHERE email = '" + email + "' AND home_name = '" + home_name + "'";
+                SqlCommand getHome;
+                getHome = new SqlCommand(query, cnn);
+                SqlDataReader reader = getHome.ExecuteReader();
+                reader.Read();
+                
+                permission = Char.Parse(reader.GetString(0));
+
+                cnn.Close();
+
+                return permission;
+            }
+            catch (Exception e) {
+                return '\0';
+            }
+        }
+
         // INSERT FUNCTIONS
 
         // Code the insert function for the table, get the table name as parameter.

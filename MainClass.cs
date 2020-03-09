@@ -107,7 +107,74 @@ namespace Home_Sweet_Home
                                     for (int i = 0; i < u.homes.Count; i++) {
                                         Console.WriteLine(i+1 + ". " + u.homes[i]);
                                     }
-                                    Console.WriteLine("\n Which one would you like to enter (1,2 or ...): ");
+
+                                    int numberHome = u.homes.Count;
+                                    int homeOption = 0;
+
+                                    do {
+                                        try
+                                        {
+                                            Console.WriteLine("\n Which one would you like to enter (1,2 or ...): ");
+                                            homeOption = Int32.Parse(Console.ReadLine());
+                                        }
+                                        catch (Exception e) {
+                                            Console.WriteLine("It can only be integer!");
+                                        }
+                                    } while (homeOption < 0 || homeOption > numberHome);
+                                    Console.Clear();
+
+                                    string selectedHome = u.homes[homeOption - 1];
+
+                                    char permission = u.checkPermission(selectedHome, u.email);
+
+                                    if (permission == 'a') {
+                                        Console.WriteLine("\n Welcome Admin of " + selectedHome + "!\n\n");
+                                    }
+                                    else {
+                                        Console.WriteLine("\n Welcome User of " + selectedHome + "!\n\n");
+                                    }
+
+                                    int optionTask = 0;
+
+                                    do {
+                                        if (permission == 'a')
+                                        {
+                                            Console.WriteLine("1. Create Home");
+                                            Console.WriteLine("2. Manage Home");
+                                            try
+                                            {
+                                                optionTask = Int32.Parse(Console.ReadLine());
+                                            }
+                                            catch (Exception e) {
+                                                Console.WriteLine("It can only be integer!");
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("1. Manage Home");
+                                            try
+                                            {
+                                                optionTask = Int32.Parse(Console.ReadLine());
+                                            }
+                                            catch (Exception e)
+                                            {
+                                                Console.WriteLine("It can only be integer!");
+                                            }
+                                        }
+                                    } while (permission == 'a' ? optionTask < 0 || optionTask > 2: optionTask < 0 || optionTask > 1);
+                                    
+                                    if (permission == 'a' && optionTask == 1)
+                                    {
+                                        Console.WriteLine("You are in Create!!");
+                                    }
+                                    else if (permission == 'u' && optionTask == 1)
+                                    {
+                                        Console.WriteLine("You are in Manage");
+                                    }
+                                    else if(optionTask == 2){
+                                        Console.WriteLine("You are in Admin Manage!");
+                                    }
+
                                     
 
                                     break;
