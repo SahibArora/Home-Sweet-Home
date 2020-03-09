@@ -143,6 +143,7 @@ namespace Home_Sweet_Home
                                             Console.WriteLine("2. Manage Home");
                                             try
                                             {
+                                                Console.WriteLine("\n\nPlease choose above the following: ");
                                                 optionTask = Int32.Parse(Console.ReadLine());
                                             }
                                             catch (Exception e) {
@@ -154,6 +155,7 @@ namespace Home_Sweet_Home
                                             Console.WriteLine("1. Manage Home");
                                             try
                                             {
+                                                Console.WriteLine("\n\nPlease choose above the following: ");
                                                 optionTask = Int32.Parse(Console.ReadLine());
                                             }
                                             catch (Exception e)
@@ -178,7 +180,7 @@ namespace Home_Sweet_Home
                                         Console.WriteLine("You are in Admin Manage!");
                                     }
 
-                                    
+                                    Console.Clear();
 
                                     break;
                                 case 0:
