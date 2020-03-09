@@ -108,6 +108,8 @@ namespace Home_Sweet_Home
                                         Console.WriteLine(i+1 + ". " + u.homes[i]);
                                     }
 
+                                    Console.WriteLine("0. To Exit");
+
                                     int numberHome = u.homes.Count;
                                     int homeOption = 0;
 
@@ -121,6 +123,12 @@ namespace Home_Sweet_Home
                                             Console.WriteLine("It can only be integer!");
                                         }
                                     } while (homeOption < 0 || homeOption > numberHome);
+
+                                    if (homeOption == 0) {
+                                        Console.Clear();
+                                        break;
+                                    }
+
                                     Console.Clear();
 
                                     string selectedHome = u.homes[homeOption - 1];
@@ -141,6 +149,7 @@ namespace Home_Sweet_Home
                                         {
                                             Console.WriteLine("1. Create Home");
                                             Console.WriteLine("2. Manage Home");
+                                            Console.WriteLine("0. To Exit");
                                             try
                                             {
                                                 Console.WriteLine("\n\nPlease choose above the following: ");
@@ -153,6 +162,7 @@ namespace Home_Sweet_Home
                                         else
                                         {
                                             Console.WriteLine("1. Manage Home");
+                                            Console.WriteLine("0. To Exit");
                                             try
                                             {
                                                 Console.WriteLine("\n\nPlease choose above the following: ");
@@ -164,6 +174,11 @@ namespace Home_Sweet_Home
                                             }
                                         }
                                     } while (permission == 'a' ? optionTask < 0 || optionTask > 2: optionTask < 0 || optionTask > 1);
+
+                                    if (optionTask == 0) {
+                                        Console.Clear();
+                                        break;
+                                    }
 
                                     Console.Clear();
                                     Console.WriteLine("\n");
