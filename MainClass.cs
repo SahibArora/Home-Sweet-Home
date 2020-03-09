@@ -162,7 +162,10 @@ namespace Home_Sweet_Home
                                             }
                                         }
                                     } while (permission == 'a' ? optionTask < 0 || optionTask > 2: optionTask < 0 || optionTask > 1);
-                                    
+
+                                    Console.Clear();
+                                    Console.WriteLine("\n");
+
                                     if (permission == 'a' && optionTask == 1)
                                     {
                                         Console.WriteLine("You are in Create!!");
