@@ -25,7 +25,7 @@ namespace Home_Sweet_Home
                         option = Int32.Parse(Console.ReadLine());
                         Console.WriteLine();
                         optionCheck = true;
-                        Console.Clear();
+                        //Console.Clear();
                     }
                     catch (Exception e) {
                         Console.WriteLine("It can only be Integer.");

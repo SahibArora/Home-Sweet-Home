@@ -9,7 +9,7 @@ namespace Home_Sweet_Home
     class SQLClass
     {
         // Connection String kept private, due to securtiy issues.
-        String connectionString = "Server=tcp:home-sweet-home.database.windows.net,1433;Initial Catalog=home_sweet_home_db;Persist Security Info=False;User ID=Home_Sweet_Home;Password=Sahib@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        String connectionString = "SERVER=sql9.freesqldatabase.com;DATABASE=sql9328528;" + "UID=sql9328528;" + "PASSWORD=ZChEZDazWD;";
         public SQLClass()
         {
             SqlConnection cnn = new SqlConnection(connectionString);
